@@ -1,6 +1,10 @@
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from './index.css';
-import { Navigation, Wrapper, LoadingIndicator } from 'components';
+import { 
+  Navigation, 
+  Wrapper, 
+  LoadingIndicator, 
+  Button } from 'components';
 import theme from "utils/theme";
 import { useTranslation } from 'react-i18next';
 import {
@@ -28,12 +32,12 @@ function App() {
         ]}
         RightElement={(
           <div>
-            <button onClick={ () => i18n.changeLanguage('pl')}>
+            <Button variant='regular' onClick={ () => i18n.changeLanguage('pl')}>
               pl
-            </button>
-            <button onClick={ () => i18n.changeLanguage('en')}>
+            </Button>
+            <Button variant='regular' onClick={ () => i18n.changeLanguage('en')}>
               en
-            </button>
+            </Button>
           </div>
         )}
         />
