@@ -1,3 +1,4 @@
+import React,{useEffect} from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from './index.css';
 import { 
@@ -12,9 +13,16 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import React from "react";
+import { connect } from 'react-redux';
+import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions';
 
-function App() {
+function App({ budget, fetchBudget, fetchBudgetedCategories }) {
+ 
+  useEffect(() => {
+    fetchBudget(1);
+    fetchBudgetedCategories(1);
+  },[fetchBudget,fetchBudgetedCategories]);
+
   const { i18n } = useTranslation();
 
   return (
@@ -56,11 +64,17 @@ function App() {
   );
 }
 
+const ConnectedApp = connect(state =>{
+  return {
+    budget: state.budget.budget
+  }
+}, {fetchBudget,fetchBudgetedCategories} )(App);
+
 function RootApp(){
   return (
     <ThemeProvider theme={theme}>
       <React.Suspense fallback={<LoadingIndicator/>}>
-        <App/>
+        <ConnectedApp/>
       </React.Suspense>
     </ThemeProvider>
   )
